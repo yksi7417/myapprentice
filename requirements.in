@@ -1,0 +1,12 @@
+# LangChain and Hugging Face dependencies
+langchain
+transformers
+huggingface_hub
+sentence-transformers
+langchain_huggingface
+langchain-community
+langchain_text_splitters
+beautifulsoup4
+tabulate
+backoff
+streamlit 
