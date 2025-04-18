@@ -32,6 +32,21 @@ st.markdown("""
             CMAKE_ARGS="-DLLAMA_CUBLAS=on" pip install llama-cpp-python --force-reinstall --upgrade --no-cache-dir
             """)
 
+
+st.header("Download models locally")
+st.markdown("""
+```
+huggingface-cli login
+huggingface-cli download TheBloke/Mistral-7B-Instruct-v0.2-GGUF mistral-7b-instruct-v0.2.Q4_K_M.gguf --local-dir ./models --local-dir-use-symlinks False
+```
+
+```
+git lfs install
+git clone https://huggingface.co/sentence-transformers/all-mpnet-base-v2 ./models/all-mpnet-base-v2
+```
+            """)
+
+
 st.header("Roadmap")
 st.markdown("""
 | Milestone	| Status|
