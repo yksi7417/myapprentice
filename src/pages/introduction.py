@@ -1,44 +1,39 @@
 import streamlit as st
 
 
-def main():
-    st.markdown("# Introduction ")
+st.markdown("# Introduction ")
 
-    st.markdown("""
-    **Conversational Automation Assistant**
+st.markdown("""
+**Conversational Automation Assistant**
 
-    "My Apprentice" is a chat-driven automation framework designed to streamline both web and desktop tasks using natural language commands and AI-powered agents.
-    """)
+"My Apprentice" is a chat-driven automation framework designed to streamline both web and desktop tasks using natural language commands and AI-powered agents.
+""")
 
-    st.header("Key Features")
-    st.markdown("""
-    - **Interactive Chat Interface**
-    Semi-transparent, always-on-top window with system tray integration for seamless user interaction.
+st.header("Key Features")
+st.markdown("""
+- **Interactive Chat Interface**
+Semi-transparent, always-on-top window with system tray integration for seamless user interaction.
 
-    - **Plugin-Based Agent System**
-    Modular agents handle specific tasks (e.g., window control, browser automation, learner agent).
+- **Plugin-Based Agent System**
+Modular agents handle specific tasks (e.g., window control, browser automation, learner agent).
 
-    - **Browser Automation with Playwright**
-    Launch, navigate, interact with web pages, fill forms, and handle multi-tab workflows.
+- **Browser Automation with Playwright**
+Launch, navigate, interact with web pages, fill forms, and handle multi-tab workflows.
 
-    - **AI-Powered DOM Analysis**
-    Use specialized models (MarkupLM, instruction-tuned LLMs) to dynamically identify form fields and generate CSS selectors.
+- **AI-Powered DOM Analysis**
+Use specialized models (MarkupLM, instruction-tuned LLMs) to dynamically identify form fields and generate CSS selectors.
 
-    - **Learner Agent**
-    Show-and-tell approach: record user interactions, summarize steps, replay tasks, and iterate based on feedback.
-    """)
+- **Learner Agent**
+Show-and-tell approach: record user interactions, summarize steps, replay tasks, and iterate based on feedback.
+""")
 
-    st.header("Roadmap")
-    st.markdown("""
-    | Milestone	| Status|
-    |:------------------|:------------------|
-    | Chat UI & Onboarding	| 🛠 In Work |
-    | Browser Automation Agent	|✅ Planned |
-    | Plugin/Agent Registry	| ✅ Planned |
-    | DOM Pruning & AI Integration |	⏳ Upcoming |
-    | Learner Agent Implementation|⏳ Upcoming |
-    """)
-
-
-if __name__ == '__page__':
-    main()
+st.header("Roadmap")
+st.markdown("""
+| Milestone	| Status|
+|:------------------|:------------------|
+| Chat UI & Onboarding	| 🛠 In Work |
+| Browser Automation Agent	|✅ Planned |
+| Plugin/Agent Registry	| ✅ Planned |
+| DOM Pruning & AI Integration |	⏳ Upcoming |
+| Learner Agent Implementation|⏳ Upcoming |
+""")
