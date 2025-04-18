@@ -22,7 +22,7 @@ if __name__ == "__main__":
     ]
     pages.append(st.Page(f"{page_dir}/acknowledgement.py",
                          title="Acknowledgement", icon="📝"))
-    pages.append(st.Page(f"{page_dir}/test_llm.py",
-                         title="Test LLM", icon="🧪"))
+    pages.append(st.Page(f"{page_dir}/sample_llm.py",
+                         title="Sample LLM", icon="🧪"))
     pg = st.navigation(pages, position="sidebar", expanded=len(pages) > 1)
     pg.run()
