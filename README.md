@@ -4,7 +4,7 @@
 
 ```
 pip install pip-tools
-pip install pip-compile
 pip-compile requirements.in
+pip install -r requirements.txt
 ```
 
