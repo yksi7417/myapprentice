@@ -12,3 +12,4 @@ backoff
 streamlit 
 python-dotenv
 chromadb
+llama-cpp-python

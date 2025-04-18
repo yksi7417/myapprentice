@@ -27,6 +27,11 @@ Use specialized models (MarkupLM, instruction-tuned LLMs) to dynamically identif
 Show-and-tell approach: record user interactions, summarize steps, replay tasks, and iterate based on feedback.
 """)
 
+st.header("Enable GPU Support")
+st.markdown("""
+            CMAKE_ARGS="-DLLAMA_CUBLAS=on" pip install llama-cpp-python --force-reinstall --upgrade --no-cache-dir
+            """)
+
 st.header("Roadmap")
 st.markdown("""
 | Milestone	| Status|
