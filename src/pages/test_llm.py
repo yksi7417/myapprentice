@@ -3,12 +3,21 @@ import streamlit as st
 import torch
 
 from langchain.chains import RetrievalQA
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 from langchain_community.llms import LlamaCpp
 
+# to turn off telemetry for chromadb
+from chromadb import Client
+from chromadb.config import Settings
+chromadb_settings = Settings(
+    anonymized_telemetry=False,
+)
+
 # ========== SETUP ==========
 os.environ["STREAMLIT_WATCHER_TYPE"] = "none"
+
+
 MODEL_PATH = "./models/mistral-7b-instruct-v0.2.Q4_K_M.gguf"
 EMBED_PATH = os.environ.get("EMBED_MODEL_PATH", "./models/all-mpnet-base-v2")
 
@@ -23,7 +32,7 @@ llm = LlamaCpp(
     model_path=MODEL_PATH,
     temperature=0.0,
     max_tokens=512,
-    n_ctx=2048,
+    n_ctx=32768,
     n_threads=8,
     verbose=False,
     n_gpu_layers=32,
@@ -34,7 +43,9 @@ llm = LlamaCpp(
 embeddings = HuggingFaceEmbeddings(model_name=EMBED_PATH,
                                    model_kwargs={"device": "cuda"},
                                    encode_kwargs={"device": "cuda"})
-vectorstore = Chroma(embedding_function=embeddings)
+
+client = Client(settings=chromadb_settings)
+vectorstore = Chroma(client=client, embedding_function=embeddings)
 
 # Example documents
 docs = [
