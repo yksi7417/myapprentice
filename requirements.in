@@ -10,3 +10,5 @@ beautifulsoup4
 tabulate
 backoff
 streamlit 
+python-dotenv
+chromadb
