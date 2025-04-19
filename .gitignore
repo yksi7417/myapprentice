@@ -176,3 +176,6 @@ cython_debug/
 # gguf models 
 models/
 *.gguf
+
+# open web ui secrets 
+.webui_secret_key
