@@ -2,7 +2,7 @@ import streamlit as st
 from streamlit.runtime.scriptrunner import RerunException
 
 
-def test_introduction_page(monkeypatch):
+def test_true(monkeypatch):
     """Test that the introduction page renders without errors."""
     # Mock Streamlit functions to prevent actual rendering
     monkeypatch.setattr(st, "markdown", lambda *args, **kwargs: None)
@@ -10,7 +10,8 @@ def test_introduction_page(monkeypatch):
 
     # Import the introduction page
     try:
-        import src.pages.introduction
+        import src.pages.introduction as introduction
+        print(introduction.__file__)
     except RerunException:
         # Ignore rerun exceptions triggered by Streamlit
         pass
