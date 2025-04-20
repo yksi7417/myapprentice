@@ -27,8 +27,7 @@ def build_chain():
         verbose=False,
         n_gpu_layers=32,
         n_batch=64,
-        use_mlock=True,
-        verbose=True
+        use_mlock=True
     )
 
     logging.info(f"CUDA? {torch.cuda.is_available()},version:{torch.version.cuda}")

@@ -28,7 +28,7 @@ streamlit run src/home.py
 
 Assuming your CUDA is version 12.1 
 ```
-pip install llama-cpp-python --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu121
+pip install llama-cpp-python --force-reinstall --no-cache-dir --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu121
 ```
 s/cu121/{your_cuda_version}/g
 
