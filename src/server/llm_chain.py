@@ -22,7 +22,7 @@ def build_chain():
         model_path=HF_MODEL_PATH,
         n_ctx=CONTEXT_SIZE,
         verbose=True,
-        n_gpu_layers=32,
+        n_gpu_layers=-1,
         use_mlock=True
     )
 
