@@ -101,3 +101,9 @@ By following these steps, you should be able to resolve the "No CUDA toolset fou
 
 
 ```
+
+### Use llama_cpp.server , see if it's using CUDA or not 
+
+```
+python -m llama_cpp.server --model models\mistral-7b-instruct-v0.2.Q4_K_M.gguf --n_gpu_layers 32
+```

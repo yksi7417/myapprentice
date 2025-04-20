@@ -20,13 +20,9 @@ logger = logging.getLogger(__name__)
 def build_chain():
     llm = LlamaCpp(
         model_path=HF_MODEL_PATH,
-        temperature=0.0,
-        max_tokens=512,
         n_ctx=CONTEXT_SIZE,
-        n_threads=8,
-        verbose=False,
-        n_gpu_layers=-1,
-        n_batch=64,
+        verbose=True,
+        n_gpu_layers=32,
         use_mlock=True
     )
 

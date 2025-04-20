@@ -1,18 +1,9 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from llm_chain import build_chain
-from config import PORT
-import uvicorn
+from src.server.llm_chain import build_chain
 import logging
-import pprint
 import time
-
-# 1. Set the global log level (DEBUG shows everything)
-logging.basicConfig(
-    level=logging.INFO,  # or logging.INFO if you want less verbosity
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-)
 
 
 app = FastAPI()
@@ -28,8 +19,8 @@ chain = build_chain()
 
 @app.post("/v1/chat/completions")
 async def chat_completions(request: Request):
-    logging.info("request: %s", request.body())
     body = await request.json()
+    logging.info("request: %s", body)
     messages = body.get("messages", [])
 
     user_input = messages[-1]["content"] if messages else "Hello?"
@@ -83,7 +74,3 @@ async def get_models():
                 "owned_by": "me",
                 "permissions": []}]
     })
-
-
-if __name__ == "__main__":
-    uvicorn.run("main:app", host="localhost", port=PORT, reload=True)
