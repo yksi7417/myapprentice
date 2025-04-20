@@ -4,6 +4,16 @@ from fastapi.responses import JSONResponse
 from llm_chain import build_chain
 from config import PORT
 import uvicorn
+import logging
+import pprint
+import time
+
+# 1. Set the global log level (DEBUG shows everything)
+logging.basicConfig(
+    level=logging.INFO,  # or logging.INFO if you want less verbosity
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+)
+
 
 app = FastAPI()
 app.add_middleware(
@@ -18,37 +28,45 @@ chain = build_chain()
 
 @app.post("/v1/chat/completions")
 async def chat_completions(request: Request):
+    logging.info("request: %s", request.body())
     body = await request.json()
     messages = body.get("messages", [])
 
     user_input = messages[-1]["content"] if messages else "Hello?"
 
-    response = chain.run({"question": user_input})
+    response = chain.invoke({"query": user_input})
 
-    return JSONResponse({
+    json_response = JSONResponse({
         "id": "chatcmpl-langchain-001",
         "object": "chat.completion",
-        "created": 1234567890,
-        "model": "llama.cpp-langchain",
+        "created": int(time.time()),
+        "model": "my-apprentice-model",
         "choices": [
             {
                 "index": 0,
                 "message": {
                     "role": "assistant",
-                    "content": response,
+                    "content": response["result"],
                 },
                 "finish_reason": "stop"
             }
         ]
     })
 
+    logging.info("response: %s", response["result"])
+
+    return json_response
+
 
 @app.get("/api/tags")
 @app.get("/v1/tags")
 async def get_tags():
-    return JSONResponse(content={[]})
+    return JSONResponse(content={
+            "object": "list",
+            "data": []})
 
 
+@app.get("/api/version")
 @app.get("/v1/version")
 async def get_version():
     return JSONResponse(content={"version": "0.5.8"})
