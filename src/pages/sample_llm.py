@@ -19,7 +19,7 @@ os.environ["STREAMLIT_WATCHER_TYPE"] = "none"
 
 
 MODEL_PATH = os.environ.get("HF_MODEL_PATH",
-                            "./models/mistral-7b-instruct-v0.2.Q4_K_M.gguf")
+                            "./models/gemma-3-4b-it-q4_0.gguf")
 EMBED_PATH = os.environ.get("EMBED_MODEL_PATH", "./models/all-mpnet-base-v2")
 
 st.title("🔍 Ask Your Offline LLM")
