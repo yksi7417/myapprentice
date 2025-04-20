@@ -1,9 +1,11 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 from src.server.llm_chain import build_chain
 import logging
 import time
+import json
+import asyncio
 
 
 app = FastAPI()
@@ -44,36 +46,74 @@ async def get_chats(page: int = 1, page_size: int = 10):
 async def chat_completions(request: Request):
     body = await request.json()
     logging.info("request: %s", body)
+    stream = body.get("stream", False)
     messages = body.get("messages", [])
 
     user_input = messages[-1]["content"] if messages else "Hello?"
 
-    response = chain.invoke({"query": user_input})
-
-    json_response = JSONResponse({
-        "id": "chatcmpl-langchain-001",
-        "object": "chat.completion",
-        "created": int(time.time()),
-        "model": "my-apprentice-model",
-        "choices": [
-            {
-                "index": 0,
-                "message": {
-                    "role": "assistant",
-                    "content": response["result"],
-                },
-                "logprobs": None,
-                "finish_reason": "stop"
+    if not stream:
+        result = chain.invoke({"query": user_input})
+        json_response = {
+            "id": "chatcmpl-langchain-001",
+            "object": "chat.completion",
+            "created": int(time.time()),
+            "model": "my-apprentice-model",
+            "choices": [
+                {
+                    "index": 0,
+                    "message": {
+                        "role": "assistant",
+                        "content": result["result"],
+                    },
+                    "logprobs": None,
+                    "finish_reason": "stop"
+                }
+            ],
+            "usage": {
+                "prompt_tokens": 0,
+                "completion_tokens": 0,
+                "total_tokens": 0
             }
-        ],
-        "usage": {"prompt_tokens": 0,
-                  "completion_tokens": 0,
-                  "total_tokens": 0}
-    })
+        }
+        logging.info("response: %s", result["result"])
+        return JSONResponse(content=json_response)
 
-    logging.info("response: %s", response["result"])
+    # STREAMING RESPONSE
+    async def event_stream():
+        result = chain.invoke({"query": user_input})
+        content = result["result"]
 
-    return json_response
+        # Role chunk
+        yield f"data: {json.dumps({'id': 'chatcmpl-001','object': 'chat.completion.chunk','choices': [{'delta': {'role': 'assistant'}, 'index': 0}]})}\n\n"
+        await asyncio.sleep(0.05)
+
+        # Token-by-token stream
+        for word in content.split():
+            chunk = {
+                "id": "chatcmpl-001",
+                "object": "chat.completion.chunk",
+                "choices": [{
+                    "delta": {"content": word + " "},
+                    "index": 0
+                }]
+            }
+            yield f"data: {json.dumps(chunk)}\n\n"
+            await asyncio.sleep(0.05)
+
+        # Final stop chunk
+        stop_chunk = {
+            "id": "chatcmpl-001",
+            "object": "chat.completion.chunk",
+            "choices": [{
+                "delta": {},
+                "index": 0,
+                "finish_reason": "stop"
+            }]
+        }
+        yield f"data: {json.dumps(stop_chunk)}\n\n"
+        yield "data: [DONE]\n\n"
+
+    return StreamingResponse(event_stream(), media_type="text/event-stream")
 
 
 @app.get("/api/tags")
