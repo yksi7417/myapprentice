@@ -24,6 +24,15 @@ streamlit run src/home.py
 
 ## CUDA not being used:
 
+### Easy Way, Use prebuilt wheels:
+
+Assuming your CUDA is version 12.1 
+```
+pip install llama-cpp-python --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu121
+```
+s/cu121/{your_cuda_version}/g
+
+### Hard Way, build it yourself using CMake:
 ```
 ​The error message you're encountering:​
 
