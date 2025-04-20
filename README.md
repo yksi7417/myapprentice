@@ -100,3 +100,9 @@ Why?
 ```
 python -m llama_cpp.server --model models\Mistral-7B-Instruct-v0.3.Q4_K_M.gguf --n_gpu_layers -1
 ```
+
+### to test if Server is giving you correct response
+
+```
+curl -X POST http://localhost:8000/v1/chat/completions -H "Content-Type: application/json" -d "{\"model\": \"local-llama\", \"messages\": [{\"role\": \"user\", \"content\": \"Tell me a joke about cats.\"}], \"temperature\": 0.7}"
+```

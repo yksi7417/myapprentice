@@ -17,6 +17,29 @@ app.add_middleware(
 chain = build_chain()
 
 
+@app.get("/api/v1/chats/")
+async def get_chats(page: int = 1, page_size: int = 10):
+    # Example chat data (replace with your database or storage logic)
+    all_chats = [
+        {"id": 1, "title": "Chat 1", "created_at": "2025-04-19T10:00:00Z"},
+        {"id": 2, "title": "Chat 2", "created_at": "2025-04-19T11:00:00Z"},
+        {"id": 3, "title": "Chat 3", "created_at": "2025-04-19T12:00:00Z"},
+    ]
+
+    # Paginate the chats
+    start = (page - 1) * page_size
+    end = start + page_size
+    paginated_chats = all_chats[start:end]
+
+    return JSONResponse(content={
+        "object": "list",
+        "data": paginated_chats,
+        "page": page,
+        "page_size": page_size,
+        "total": len(all_chats),
+    })
+
+
 @app.post("/v1/chat/completions")
 async def chat_completions(request: Request):
     body = await request.json()
@@ -39,9 +62,13 @@ async def chat_completions(request: Request):
                     "role": "assistant",
                     "content": response["result"],
                 },
+                "logprobs": None,
                 "finish_reason": "stop"
             }
-        ]
+        ],
+        "usage": {"prompt_tokens": 0,
+                  "completion_tokens": 0,
+                  "total_tokens": 0}
     })
 
     logging.info("response: %s", response["result"])
