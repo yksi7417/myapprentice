@@ -1,8 +1,9 @@
 import json
 from pprint import pprint
 from src.framework.tool_registry import ToolRegistry
-from src.ai.llm_chain import build_chain
-# from mock_llm import mock_llm
+from src.ai.llm_tooluse_chain import build_chain
+
+use_mock_llm = False
 
 
 def handle_request(user_input: str, registry: ToolRegistry):
@@ -15,18 +16,31 @@ If the user asks for anything outside this list, politely say it's not possible 
 Respond ONLY with the tool name and the arguments as JSON if applicable.
 """
 
-    # response = mock_llm(user_input, system_prompt)  # Replace with local LLM later
     chain = build_chain()
     response = chain.invoke({"query": user_input,
-                             "system_prompt": system_prompt})
+                            "system_prompt": system_prompt})
+    pprint(response)
+    llm_output = response.get("text", "")
 
     try:
-        pprint(response)
-        result = response["result"]
-        tool = registry.get(result["tool"])
+        if "```json" in llm_output:
+            llm_output = llm_output.split("```json")[-1].split("```")[-2].strip()
+        elif llm_output.startswith("```"):
+            llm_output = llm_output.strip("`\n")
+
+        result = json.loads(llm_output)
+        if isinstance(result, dict) and "tool" in result:
+            tool = registry.get(result["tool"])
         if tool:
-            return tool["func"](**result.get("args", {}))
+            args = result.get("args") or result.get("arguments") or {}
+            if isinstance(args, dict):
+                return tool["func"](**args)
+            elif isinstance(args, list):
+                return tool["func"](*args)
+            else:
+                return "Error: Invalid argument format."
         else:
             return "Sorry, that tool is not available."
+
     except Exception as e:
-        return f"Error: {str(e)}"
+        return f"Error: {str(e)}\n\nRaw output: {llm_output}"
