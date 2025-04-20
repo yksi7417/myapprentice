@@ -20,6 +20,14 @@ pip-compile requirements.in --output-file requirements.txt
 streamlit run src/home.py
 ```
 
+# Download Models 
+
+```
+pip install huggingface-hub
+huggingface-cli login      
+huggingface-cli download google/gemma-3-4b-it-qat-q4_0-gguf  --local-dir ./models
+```
+
 # Problems 
 
 ## CUDA not being used:
@@ -29,6 +37,8 @@ streamlit run src/home.py
 Assuming your CUDA is version 12.1 
 ```
 pip install llama-cpp-python --force-reinstall --no-cache-dir --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu121
+pip uninstall torch
+pip install torch --force-reinstall --no-cache-dir --index-url https://download.pytorch.org/whl/cu121
 ```
 s/cu121/{your_cuda_version}/g
 

@@ -25,7 +25,7 @@ def build_chain():
         n_ctx=CONTEXT_SIZE,
         n_threads=8,
         verbose=False,
-        n_gpu_layers=32,
+        n_gpu_layers=-1,
         n_batch=64,
         use_mlock=True
     )
