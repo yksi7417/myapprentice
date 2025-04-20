@@ -32,17 +32,7 @@ huggingface-cli download google/gemma-3-4b-it-qat-q4_0-gguf  --local-dir ./model
 
 ## CUDA not being used:
 
-### Easy Way, Use prebuilt wheels:
-
-Assuming your CUDA is version 12.1 
-```
-pip install llama-cpp-python --force-reinstall --no-cache-dir --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu121
-pip uninstall torch
-pip install torch --force-reinstall --no-cache-dir --index-url https://download.pytorch.org/whl/cu121
-```
-s/cu121/{your_cuda_version}/g
-
-### Hard Way, build it yourself using CMake:
+### Hard Way, works, build it yourself using CMake:
 ```
 ​The error message you're encountering:​
 
@@ -99,11 +89,14 @@ After setting the environment variables, reinstall the package to ensure it buil
 pip install llama-cpp-python --force-reinstall --upgrade --no-cache-dir
 By following these steps, you should be able to resolve the "No CUDA toolset found" error and enable GPU support for your llama-cpp-python project on Windows.
 
+it end up telling me it's version 11.8 though.
+025-04-19 22:18:55,684 - root - INFO - CUDA? True,version:11.8
+Why? 
 
 ```
 
 ### Use llama_cpp.server , see if it's using CUDA or not 
 
 ```
-python -m llama_cpp.server --model models\mistral-7b-instruct-v0.2.Q4_K_M.gguf --n_gpu_layers -1
+python -m llama_cpp.server --model models\mistral-7b-instruct-v0.3.Q4_K_M.gguf --n_gpu_layers -1
 ```
