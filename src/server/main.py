@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
-from src.server.llm_chain import build_chain
+from src.ai.llm_chain import build_chain
 import logging
 import time
 import json
