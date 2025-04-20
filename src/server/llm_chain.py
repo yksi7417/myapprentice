@@ -1,4 +1,4 @@
-from config import HF_MODEL_PATH, CONTEXT_SIZE, EMBED_PATH
+from src.server.config import HF_MODEL_PATH, CONTEXT_SIZE, EMBED_PATH
 import torch
 import logging
 
