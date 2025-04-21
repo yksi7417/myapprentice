@@ -8,14 +8,16 @@ def handle_request(user_input: str, registry: ToolRegistry, chain: LLMChain):
     tools = registry.list_tools()
     tool_descriptions = "\n".join(f"{name}: {info['description']}" for name, info in tools.items())
 
-    system_prompt = f"""You are an assistant. You may only use the following tools:
+    system_prompt = f"""You are an assistant.
+You may only use the following tools:
 {tool_descriptions}
-If the user asks for anything outside this list, politely say it's not possible and suggest what you can do instead.
-Respond ONLY with the tool name and the arguments as JSON if applicable.
+If the user asks for anything outside this list,
+politely say it's not possible and suggest what you can do instead.
+Respond ONLY with the tool name and the arguments as JSON.
 """
 
     llm_output = chain.invoke({"query": user_input,
-                            "system_prompt": system_prompt})
+                               "system_prompt": system_prompt})
     pprint(llm_output)
 
     try:
@@ -36,7 +38,8 @@ Respond ONLY with the tool name and the arguments as JSON if applicable.
             else:
                 return "Error: Invalid argument format."
         else:
-            return "Sorry, that tool is not available."
+            return f"""Would you like to the followings instead?
+{tool_descriptions}"""
 
     except Exception as e:
         return f"Error: {str(e)}\n\nRaw output: {llm_output}"
