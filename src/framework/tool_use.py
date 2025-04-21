@@ -1,12 +1,10 @@
 import json
 from pprint import pprint
 from src.framework.tool_registry import ToolRegistry
-from src.ai.llm_tooluse_chain import build_chain
-
-use_mock_llm = False
+from langchain.chains import LLMChain
 
 
-def handle_request(user_input: str, registry: ToolRegistry):
+def handle_request(user_input: str, registry: ToolRegistry, chain: LLMChain):
     tools = registry.list_tools()
     tool_descriptions = "\n".join(f"{name}: {info['description']}" for name, info in tools.items())
 
@@ -16,11 +14,9 @@ If the user asks for anything outside this list, politely say it's not possible 
 Respond ONLY with the tool name and the arguments as JSON if applicable.
 """
 
-    chain = build_chain()
-    response = chain.invoke({"query": user_input,
+    llm_output = chain.invoke({"query": user_input,
                             "system_prompt": system_prompt})
-    pprint(response)
-    llm_output = response.get("text", "")
+    pprint(llm_output)
 
     try:
         if "```json" in llm_output:
