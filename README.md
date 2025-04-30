@@ -93,12 +93,36 @@ it end up telling me it's version 11.8 though.
 025-04-19 22:18:55,684 - root - INFO - CUDA? True,version:11.8
 Why? 
 
+After I install a new GPU card (now I have RTX 2060 SUPER + RTX3060 , i need to recompile again)
+
+$env:FORCE_CMAKE = "1"
+$env:CMAKE_ARGS  = "-DGGML_CUDA=on -DCMAKE_CUDA_ARCHITECTURES=75;86"
+$env:CUDACXX      = "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\bin\nvcc.exe"
+
+pip install llama-cpp-python[server] --upgrade --force-reinstall --no-cache-dir
+
+Mon Apr 28 20:42:49 2025
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 560.94                 Driver Version: 560.94         CUDA Version: 12.6     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                  Driver-Model | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 3060      WDDM  |   00000000:05:00.0 Off |                  N/A |
+|  0%   34C    P8              8W /  170W |       0MiB /  12288MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA GeForce RTX 2060 ...  WDDM  |   00000000:06:00.0  On |                  N/A |
+| 55%   44C    P8             11W /  175W |     814MiB /   8192MiB |     10%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
 ```
 
 ### Use llama_cpp.server , see if it's using CUDA or not 
 
 ```
-python -m llama_cpp.server --model models\Mistral-7B-Instruct-v0.3.Q4_K_M.gguf --n_gpu_layers -1
+$Env:CUDA_VISIBLE_DEVICES="0,1"; python -m llama_cpp.server --model models\Mistral-7B-Instruct-v0.3.Q4_K_M.gguf --n_gpu_layers -1 --tensor_split 1 1
 ```
 
 ### to test if Server is giving you correct response
@@ -106,3 +130,44 @@ python -m llama_cpp.server --model models\Mistral-7B-Instruct-v0.3.Q4_K_M.gguf -
 ```
 curl -X POST http://localhost:8000/v1/chat/completions -H "Content-Type: application/json" -d "{\"model\": \"local-llama\", \"messages\": [{\"role\": \"user\", \"content\": \"Tell me a joke about cats.\"}], \"temperature\": 0.7}"
 ```
+
+### CrewAI showing error:   
+
+```
+    from litellm.types.utils import ChatCompletionDeltaToolCall
+ModuleNotFoundError: No module named 'litellm.types.utils'
+```
+
+Solution:  hack the file under D:\conda\envs\speech_env\Lib\site-packages\litellm\utils.py
+change the block from
+
+```
+try:
+    # Python 3.9+
+    with resources.files("litellm.litellm_core_utils.tokenizers").joinpath(
+        "anthropic_tokenizer.json"
+    ).open("r") as f:
+        json_data = json.load(f)
+except (ImportError, AttributeError, TypeError):
+    with resources.open_text(
+        "litellm.litellm_core_utils.tokenizers", "anthropic_tokenizer.json"
+    ) as f:
+        json_data = json.load(f)
+```
+
+to 
+
+```
+try:
+    # Python 3.9+
+    with resources.files("litellm.litellm_core_utils.tokenizers").joinpath(
+        "anthropic_tokenizer.json"
+    ).open("r", encoding="utf-8") as f:  ## Hardcode encoding to utf-8 for Windows
+        json_data = json.load(f)
+except (ImportError, AttributeError, TypeError):
+    with resources.open_text(
+        "litellm.litellm_core_utils.tokenizers", "anthropic_tokenizer.json"
+    ) as f:
+        json_data = json.load(f)
+```
+
