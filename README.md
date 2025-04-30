@@ -171,3 +171,30 @@ except (ImportError, AttributeError, TypeError):
         json_data = json.load(f)
 ```
 
+
+### Ollama - end up not using because it cannot split models like llama.cpp 
+
+it is possible to create your own model file 
+
+```
+# Modelfile
+FROM ./DeepSeek-R1-Distill-Qwen-14B-Q4_K_M.gguf
+
+PARAMETER temperature 0.7
+PARAMETER top_p 0.95
+PARAMETER stop "<|endoftext|>"
+```
+
+```
+PS D:\dvlp\myapprentice\models> ollama create deepseek-qwen-14b-q4km -f Modelfile
+gathering model components
+copying file sha256:67a7933cf2ad596a393c8e13b30bc4da2d50b283e250b78554aed18817eca31c 100%
+parsing GGUF
+using existing layer sha256:67a7933cf2ad596a393c8e13b30bc4da2d50b283e250b78554aed18817eca31c
+creating new layer sha256:0439aa4ff272f2884b931c3e0f88b55d1dab33b35742ebbc407541802b389be9
+writing manifest
+success
+PS D:\dvlp\myapprentice\models> ollama list
+NAME                             ID              SIZE      MODIFIED
+deepseek-qwen-14b-q4km:latest    8f5bae63627a    9.0 GB    13 seconds ago
+```
