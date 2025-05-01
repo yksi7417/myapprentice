@@ -43,7 +43,11 @@ def run_task(agent, task_desc, output_name, force=False):
 
     crew = Crew(agents=[agent], tasks=[task])
     result = crew.kickoff()
-    joined_output = "\n\n".join(result.tasks_output)
+    # Properly extract output from TaskOutput objects
+    if hasattr(result, "tasks_output") and isinstance(result.tasks_output, list):
+        joined_output = "\n\n".join(str(task.raw) for task in result.tasks_output if task.raw)
+    else:
+        joined_output = str(result.task_output)
 
     write_output(output_name, joined_output)
     return joined_output
