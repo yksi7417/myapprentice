@@ -122,7 +122,7 @@ Mon Apr 28 20:42:49 2025
 ### Use llama_cpp.server , see if it's using CUDA or not 
 
 ```
-$Env:CUDA_VISIBLE_DEVICES="0,1"; python -m llama_cpp.server --model models\Mistral-7B-Instruct-v0.3.Q4_K_M.gguf --n_gpu_layers -1 --tensor_split 1 1
+ $Env:CUDA_VISIBLE_DEVICES="0,1"; python -m llama_cpp.server --model .\models\DeepSeek-R1-Distill-Qwen-14B-Q8_0.gguf --n_gpu_layers -1 --tensor_split 2 1 --model_alias local-qwen14b
 ```
 
 ### to test if Server is giving you correct response

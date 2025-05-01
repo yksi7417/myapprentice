@@ -2,10 +2,15 @@ from crewai import Crew
 from crewai import Task
 from src.agents.product_manager import ProductManager
 
-import os
-os.environ['LITELLM_API_KEY'] = 'sk-local'
-os.environ['LITELLM_API_BASE'] = 'http://localhost:8000/v1'
-os.environ['LITELLM_MODEL'] = 'mistral-7b'
+# import os
+# os.environ['LITELLM_API_KEY'] = 'sk-local'
+# os.environ['LITELLM_API_BASE'] = 'http://localhost:8000/v1'
+# os.environ['LITELLM_MODEL'] = '.\\models\\DeepSeek-R1-Distill-Qwen-14B-Q8_0.gguf'
+
+# os.environ["OPENAI_ORGANIZATION"] = "your-org-id"       # OPTIONAL
+# os.environ["OPENAI_BASE_URL"] = "http://localhost:8000/v1"     # OPTIONAL
+# os.environ['OPENAI_MODEL'] = '.\\models\\DeepSeek-R1-Distill-Qwen-14B-Q8_0.gguf'
+# os.environ['OPENAI_API_KEY'] = 'sk-local'
 
 
 def main():
@@ -27,7 +32,8 @@ def main():
 
     crew = Crew(
         agents=[ProductManager],
-        tasks=[DefineSpecs]
+        tasks=[DefineSpecs],
+        verbose=True
     )
 
     result = crew.kickoff()
