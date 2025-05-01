@@ -19,7 +19,8 @@ The objective is to develop an engaging single-player mahjong game adhering to C
 - **Competitive Timed Mode**: Adds challenge with time constraints.
 
 ### 2.3. AI Opponent System
-- **Skill Levels**: Multiple levels from novice to expert, adjusting tile selection and strategy complexity.- **Learning Algorithm**: AI improves based on player interactions.
+- **Skill Levels**: Multiple levels from novice to expert, adjusting tile selection and strategy complexity.
+- **Learning Algorithm**: AI improves based on player interactions.
 
 ---
 
