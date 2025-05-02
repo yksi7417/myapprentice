@@ -9,5 +9,5 @@ if __name__ == "__main__":
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     )
 
-    uvicorn.run("src.server.proxy:app", host="localhost",
+    uvicorn.run("src.server.common:app", host="localhost",
                 port=CHATGPT_PROXY_PORT, reload=False)
