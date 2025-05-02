@@ -201,5 +201,5 @@ deepseek-qwen-14b-q4km:latest    8f5bae63627a    9.0 GB    13 seconds ago
 
 # Chrome on playwright 
 ```
-chrome --remote-debugging-port=9222 --user-data-dir="D:\my-chrome-profile"
+"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="D:\my-chrome-profile"
 ```
