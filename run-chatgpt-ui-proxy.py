@@ -1,15 +1,13 @@
-from crewai import Crew
-from src.agents.chatgpt_ui_agent import ChatGPTUIAgent
+import logging
+import uvicorn
+from src.server.config import CHATGPT_PROXY_PORT
 
-crew = Crew(
-    agents=[ChatGPTUIAgent],
-    tasks=[{
-        "description": "Use ChatGPT UI to answer: 'Summarize quantum entanglement in simple terms'",
-        "agent": ChatGPTUIAgent
-    }],
-    verbose=True
-)
 
 if __name__ == "__main__":
-    result = crew.run()
-    print("OpenAI format result:\n", result)
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    )
+
+    uvicorn.run("src.server.proxy:app", host="localhost",
+                port=CHATGPT_PROXY_PORT, reload=False)
