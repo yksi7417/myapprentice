@@ -9,22 +9,20 @@ class ChatGPTWebTool(BaseTool):
 
     async def _ask_chatgpt(self, prompt: str) -> str:
         async with async_playwright() as p:
-            browser = await p.chromium.launch(headless=False)  # Change to True when stable
-            context = await browser.new_context(storage_state="playwright_auth.json")  # use saved login
-            page = await context.new_page()
-            await page.goto("https://chat.openai.com")
+            browser = await p.chromium.connect_over_cdp("http://localhost:9222")
 
-            await page.wait_for_selector("textarea", timeout=15000)
-            await page.fill("textarea", prompt)
+            # Get first page in the first context
+            context = browser.contexts[0]
+            page = context.pages[0] if context.pages else await context.new_page()
+
+            await page.goto("https://chat.openai.com")
+            await page.fill("textarea", "Summarize black holes in simple terms")
             await page.keyboard.press("Enter")
 
-            # Wait for response to appear
-            await page.wait_for_selector("div.markdown", timeout=30000)
-
-            # Get all response blocks
-            responses = await page.locator("div.markdown").all_text_contents()
-            await browser.close()
-            return responses[-1].strip() if responses else "No response found."
+            await page.wait_for_selector("div.markdown")
+            response = await page.inner_text("div.markdown")
+            print("Response:", response)
+            return response[-1].strip() if response else "No response found."
 
     def _run(self, prompt: str) -> dict:
         output = asyncio.run(self._ask_chatgpt(prompt))

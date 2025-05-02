@@ -1,0 +1,174 @@
+{
+  "cookies": [
+    {
+      "name": "__cf_bm",
+      "value": "Rzr7olWBW_g8HeDIwTrr.VgluFaUwXpGc5sURPOdqTA-1746195850-1.0.1.1-sEoSF8LE1Sk6vChfxZPN7.DXSVMsHVQvW4tQH6aqFqR8CoKWBCik11aWoO3oVY5562_ok1WYNhphn_N.943ygq9D2v.3sZtNyI4vlr1ys9c",
+      "domain": ".oaistatic.com",
+      "path": "/",
+      "expires": 1746197650.019177,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_cfuvid",
+      "value": "gCWPKT7K4Aa14PozLepaxmHNpP_OHu6fuw2QG9lDPxQ-1746195850097-0.0.1.1-604800000",
+      "domain": ".oaistatic.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__Host-next-auth.csrf-token",
+      "value": "c9d33248bf0e5334fe16124837d3c9da021cf6465472f9da842bfc89c68305a4%7Cc17a7c18576be4fe83567179c59e544dbc6e19ffb4bdef2315b5313542e2afad",
+      "domain": "chatgpt.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-next-auth.callback-url",
+      "value": "https%3A%2F%2Fchatgpt.com",
+      "domain": "chatgpt.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "oai-did",
+      "value": "c2b7239e-3f36-4d2d-91a5-9525672eb55a",
+      "domain": ".chatgpt.com",
+      "path": "/",
+      "expires": 1777299850.118012,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__cf_bm",
+      "value": "f4spN39rygUQUPKcjzWdxuwDLijiL6RuMhe4mF5HWd8-1746195850-1.0.1.1-EGEMfBukwsUa8fOo5s5bqDakuqJvxzT8JaKqkL9BkPe.cCs7kA_Z1RL8kbuI1.Irrk52Oh6rGP9hro1hoff.iTvs8BzvnS7WzT47e6Kcy1g",
+      "domain": ".chatgpt.com",
+      "path": "/",
+      "expires": 1746197650.118044,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__cflb",
+      "value": "0H28vzvP5FJafnkHxisu3R3fkFPUBQsBMjojom7gB23",
+      "domain": "chatgpt.com",
+      "path": "/",
+      "expires": 1746199450.118071,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_cfuvid",
+      "value": "BvSTQ2Y6x_k1oOJYHCbNPr7mgWFCeZPxmaRziy2vh8o-1746195850193-0.0.1.1-604800000",
+      "domain": ".chatgpt.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "cf_clearance",
+      "value": "m6qXCynGsxUNgoZCQScyxkllPrChjRviAlk2uU_IP0k-1746195850-1.2.1.1-igY9bnPLF_36MjaKn9pQqWYe2CjWkMisACFPNdhrjHBv2HWEAIp35j1HyN0y8byvpSN7UgieL87pMGHLWfK3R0pDtEAXELftThAwXjv6HV7PZ84lB9wGy71tL96xRqVDY6Hkt9qwhfPi5eObfPUoIZ.2g1Ew8sRw5z7gwIh.KtRRLowE_kKb8Ro0SEzjRN7vrm76enPa0A31fD.nnOF.ytsbdUrdFeyZQxYYBnSz6E37GECfE2vdSRBF2z0Dq0hsmk4SpVm4ePvcl.g6sJznYIAV5M.04xFclSJNgdwrYhF9Ya7fhkebzb6wrUgPZ2QzosyyM6HVFah_NwdI1R.bqZiopP95ABgwgp5ORWlgeH8",
+      "domain": ".chatgpt.com",
+      "path": "/",
+      "expires": 1777731850.52508,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_dd_s",
+      "value": "rum=0&expire=1746196755555&logs=1&id=08203233-77a8-49aa-9f09-8fe799413329&created=1746195850969",
+      "domain": "chatgpt.com",
+      "path": "/",
+      "expires": 1746196755,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Strict"
+    },
+    {
+      "name": "cf_chl_rc_m",
+      "value": "3",
+      "domain": "chatgpt.com",
+      "path": "/",
+      "expires": 1746199531,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://chatgpt.com",
+      "localStorage": [
+        {
+          "name": "oai-did",
+          "value": "\"c2b7239e-3f36-4d2d-91a5-9525672eb55a\""
+        },
+        {
+          "name": "oai/apps/caUpsellBanner",
+          "value": "{\"state\":{},\"version\":0}"
+        },
+        {
+          "name": "oai/apps/capExpiresAt",
+          "value": "{\"state\":{\"isoDate\":\"\"},\"version\":0}"
+        },
+        {
+          "name": "statsig.session_id.1792610830",
+          "value": "{\"sessionID\":\"5a5510a8-e4ea-4575-88cd-eaaf3c97ec6f\",\"startTime\":1746195851146,\"lastUpdate\":1746195855945}"
+        },
+        {
+          "name": "oai/apps/hasSeenNoAuthImagegenNux",
+          "value": "true"
+        },
+        {
+          "name": "oai/apps/lastPageLoadDate",
+          "value": "\"2025-05-02T14:24:11.148Z\""
+        },
+        {
+          "name": "oai/apps/caUserUpsellBanner",
+          "value": "{\"state\":{},\"version\":0}"
+        },
+        {
+          "name": "client-correlated-secret",
+          "value": "{\"alg\":\"HS512\",\"ext\":true,\"k\":\"uGZZdhoBK0XO28wUdhR6X_RnQVBHUIehGrPRj0G0mV3EnRPAsEpAFn08_9c6tMlvjcierYrxtsPgd5wtCCrzVEjLEOwU43_kt44hFB8xzsDQQ75QU1O7FAXAajuZa7JHOiUUcp3P6rhIGRc9QUW6AfGAj8I3y104Cm1iXdHGfDk\",\"key_ops\":[\"sign\",\"verify\"],\"kty\":\"oct\"}"
+        },
+        {
+          "name": "statsig.stable_id.1792610830",
+          "value": "\"c2b7239e-3f36-4d2d-91a5-9525672eb55a\""
+        },
+        {
+          "name": "oai/apps/debugSettings",
+          "value": "{\"state\":{\"enableFConversationEndpoint\":false,\"showCompletionPerfData\":false,\"jsonViewerFilters\":{},\"recordRendering\":false},\"version\":0}"
+        },
+        {
+          "name": "search.attributions-settings",
+          "value": "{\"state\":{\"debugMode\":false,\"viewModelPredictedFallback\":false,\"disableSegmentReplacement\":false,\"useSigmoid\":true,\"influenceTemperature\":0.2,\"probThreshold\":0.45,\"probBaseline\":0.02},\"version\":8}"
+        }
+      ]
+    },
+    {
+      "origin": "https://challenges.cloudflare.com",
+      "localStorage": [
+        {
+          "name": "cf.turnstile.u",
+          "value": "f68z9OqzWys.ChHN2Fw9gttZQ5EGeYF.L1aARxSMypw-1746195856-1.3.1.1-7KYqNlBo7hQTgkc1doI3ocggeY4PWlzZd4qbF9lp0n_sqelDHdDfQ3mLWKIJG2FWAIKZHrhkRoTK8xpk4LHzFA"
+        }
+      ]
+    }
+  ]
+}
